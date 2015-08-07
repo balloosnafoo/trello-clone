@@ -1,0 +1,9 @@
+<h1>Sign in</h1>
+
+<%= render partial: "shared/user_form",
+           locals: {
+             target_url: session_url,
+             user: @user,
+             submit_verb: "Sign in",
+             patch: false
+           } %>
