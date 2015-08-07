@@ -1,9 +1,10 @@
 Quello.Views.BoardsIndex = Backbone.CompositeView.extend({
   template: JST['boards_index'],
 
-  tagName: "li",
-
   initialize: function ($el) {
+    this.listenTo(this.collection, 'add', this.addBoardSubview);
+    this.listenTo(this.collection, 'sync add', this.render);
+
     this.collection.each( function (board) {
       this.addBoardSubview(board);
     }.bind(this));
@@ -21,7 +22,6 @@ Quello.Views.BoardsIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    debugger;
     this.$el.html(this.template());
     this.attachSubviews();
 

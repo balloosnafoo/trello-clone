@@ -5,7 +5,7 @@ class Api::BoardsController < ApplicationController
   end
 
   def create
-    @board = Board.find(params[:id])
+    @board = current_user.boards.create(board_params)
     if @board.save
       render json: @board
     else
@@ -32,6 +32,6 @@ class Api::BoardsController < ApplicationController
 
   private
   def board_params
-    params.require[:board].permit[:title]
+    params.require(:board).permit(:title)
   end
 end

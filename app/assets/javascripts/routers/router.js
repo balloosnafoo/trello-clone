@@ -5,8 +5,8 @@ Quello.Routers.Router = Backbone.Router.extend({
   },
 
   initialize: function (boards, $rootEl) {
-    this.boards = boards,
-    this.$rootEl = $rootEl
+    this.boards = boards;
+    this.$rootEl = $rootEl;
   },
 
   boardsIndex: function () {
@@ -14,8 +14,7 @@ Quello.Routers.Router = Backbone.Router.extend({
       collection: this.boards,
       $el: this.$rootEl
     });
-
-    indexView.render();
+    this.swap(indexView);
   },
 
   swap: function (view) {
