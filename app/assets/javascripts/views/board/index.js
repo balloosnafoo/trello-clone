@@ -14,7 +14,7 @@ Quello.Views.BoardsIndex = Backbone.CompositeView.extend({
     var boardListItem = new Quello.Views.BoardListItem({
       model: board
     });
-    this.addSubview("ul.boards-list", boardListItem);
+    this.addSubview("div.boards-list", boardListItem);
   },
 
   events: {

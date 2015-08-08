@@ -8,16 +8,27 @@
 </head>
 <body>
 
-<% if logged_in? %>
-  <%= button_to "Log out", session_url, method: :delete %>
-<% else %>
-  <%= link_to "Sign up", new_user_url %>
-  <%= link_to "Sign in", new_session_url %>
-<% end %>
+<nav class="navbar navbar-default">
+  <ul class="nav navbar-nav">
+    <% if logged_in? %>
+      <li>
+        <%= button_to "Log out", session_url, {method: :delete, class: "nav navbar-nav"} %>
+      </li>
+    <% else %>
+      <li><%= link_to "Sign up", new_user_url %></li>
+      <li><%= link_to "Sign in", new_session_url %></li>
+    <% end %>
+  </ul>
+  <div class="navbar-header">
+    <a href="#" class="navbar-brand">Quello</a>
+  </div>
+</nav>
 
-<% if flash[:errors] %>
-  <%= flash[:errors].map { |e| "<li>#{e}</li>" }.join.html_safe %>
-<% end %>
+<ul>
+  <% if flash[:errors] %>
+    <%= flash[:errors].map { |e| "<li>#{e}</li>" }.join.html_safe %>
+  <% end %>
+</ul>
 
 <%= yield %>
 
