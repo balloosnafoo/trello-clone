@@ -2,7 +2,8 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
   template: JST['board/show'],
 
   events: {
-    "click .board-delete-button": "delete"
+    "click .board-delete-button": "delete",
+    "submit form": "createList"
   },
 
   initialize: function () {
@@ -19,6 +20,14 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
         );
       }
     });
+  },
+
+  createList: function (event) {
+    var formData = $(event.currentTarget).serializeJSON().list;
+    formData.board_id = this.model.id;
+
+    var newList = new Quello.Models.List(formData);
+    newList.save();
   },
 
   render: function () {
