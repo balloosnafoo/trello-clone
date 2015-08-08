@@ -1,5 +1,5 @@
 Quello.Views.BoardListItem = Backbone.View.extend({
-  template: JST['board_list_item'],
+  template: JST['board/list_item'],
 
   tagName: 'li',
 
