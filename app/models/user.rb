@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many :boards
+  has_many :lists, through: :boards, source: :lists
   has_many(
     :board_memberships,
     class_name: "BoardMembership",

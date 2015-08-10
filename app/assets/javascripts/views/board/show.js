@@ -3,11 +3,21 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
 
   events: {
     "click .board-delete-button": "delete",
-    "submit form": "createList"
   },
 
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.lists(), "add", this.addListSubview);
+    this.model.lists().each(function (list) {
+      this.addListSubview(list);
+    }.bind(this));
+  },
+
+  addListSubview: function (list) {
+    var listIndexItem = new Quello.Views.ListsIndexItem({
+      model: list
+    });
+    this.addSubview("div.lists-index.row", listIndexItem);
   },
 
   delete: function (event) {
@@ -22,18 +32,20 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
     });
   },
 
-  createList: function (event) {
-    var formData = $(event.currentTarget).serializeJSON().list;
-    formData.board_id = this.model.id;
+  renderListForm: function () {
+    var listForm = new Quello.Views.ListForm({
+      board: this.model
+    });
 
-    var newList = new Quello.Models.List(formData);
-    newList.save();
+    return listForm.render();
   },
 
   render: function () {
     this.$el.html(this.template({
       board: this.model
     }));
+    this.$el.append(this.renderListForm().$el);
+    this.attachSubviews();
 
     return this;
   }

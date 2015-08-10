@@ -3,10 +3,14 @@ Quello.Collections.Lists = Backbone.Collection.extend({
 
   model: Quello.Models.List,
 
+  initialize: function (options) {
+    this.board = options.board;
+  },
+
   getOrFetch: function (id) {
     var list = this.get(id);
     if (!board) {
-      list = new Quello.Models.List({id: id});
+      list = new Quello.Models.List({ id: id });
       list.fetch({
         success: function () {
           this.add(list);
