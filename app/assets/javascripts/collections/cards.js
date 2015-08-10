@@ -1,4 +1,4 @@
-Quello.Collections.Cards = Backbone.Collections.extend({
+Quello.Collections.Cards = Backbone.Collection.extend({
   url: "api/cards",
 
   model: Quello.Models.Card
