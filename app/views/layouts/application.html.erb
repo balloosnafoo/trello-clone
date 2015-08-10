@@ -20,15 +20,15 @@
     <% end %>
   </ul>
   <div class="navbar-header">
-    <a href="#" class="navbar-brand">Quello</a>
+    <a href="" class="navbar-brand">Quello</a>
   </div>
 </nav>
 
-<ul>
-  <% if flash[:errors] %>
+<% if flash[:errors] %>
+  <ul>
     <%= flash[:errors].map { |e| "<li>#{e}</li>" }.join.html_safe %>
-  <% end %>
-</ul>
+  </ul>
+<% end %>
 
 <%= yield %>
 

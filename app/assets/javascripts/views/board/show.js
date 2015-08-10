@@ -8,6 +8,7 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.lists(), "add", this.addListSubview);
+    this.listenTo(this.model.lists(), "add", this.render);
     this.model.lists().each(function (list) {
       this.addListSubview(list);
     }.bind(this));
@@ -34,7 +35,8 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
 
   renderListForm: function () {
     var listForm = new Quello.Views.ListForm({
-      board: this.model
+      board: this.model,
+      model: new Quello.Models.List()
     });
 
     return listForm.render();

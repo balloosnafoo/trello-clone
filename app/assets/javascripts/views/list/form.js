@@ -21,8 +21,12 @@ Quello.Views.ListForm = Backbone.View.extend({
     event.preventDefault();
     var formData = $(event.currentTarget).serializeJSON().list;
     formData.board_id = this.board.id;
-    var list = new Quello.Models.List(formData);
-    list.save({});
+    this.model.set(formData);
+    this.model.save({}, {
+      success: function () {
+        this.board.lists().add(this.model);
+      }.bind(this)
+    });
 
     $(event.currentTarget).find("#list-title").val("")
   }

@@ -3,7 +3,7 @@ Quello.Views.ListsIndexItem = Backbone.View.extend({
 
   tagName: "div",
 
-  className: "col-md-3",
+  className: "col-md-3 list-item",
 
   render: function () {
     var renderedContent = this.template({
