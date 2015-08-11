@@ -3,13 +3,28 @@ Quello.Views.ListsIndexItem = Backbone.CompositeView.extend({
 
   tagName: "div",
 
-  className: "col-md-3 list-item",
+  className: "list-item",
+  // className: "col-md-3 list-item",
+
+  events: {
+    "click .list-delete": "destroyList"
+  },
+
+  initialize: function () {
+    this.listenTo(this.model.cards(), 'add', this.addBoardSubview);
+
+    // debugger;
+    this.model.cards().each( function (card) {
+      this.addCardSubview(card);
+    }.bind(this));
+
+  },
 
   addCardSubview: function (card) {
     var cardIndexItem = new Quello.Views.CardIndexItem({
       model: card
     });
-    this.addSubview("ul.cards-list", cardListItem);
+    this.addSubview("ul.cards-list", cardIndexItem);
   },
 
   render: function () {
@@ -17,7 +32,15 @@ Quello.Views.ListsIndexItem = Backbone.CompositeView.extend({
       list: this.model
     });
 
+    this.attachSubviews();
     this.$el.html(renderedContent);
     return this;
+  },
+
+  destroyList: function (event) {
+    event.preventDefault();
+    debugger;
+    this.model.destroy();
+    // debugger;
   }
 });

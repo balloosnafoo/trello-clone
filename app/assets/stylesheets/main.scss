@@ -4,7 +4,38 @@
 }
 
 .list-item {
-  height: 300px;
+  height: 500px;
+  padding: 10px 20px;
   background-color: #4d4d4d;
   color: white;
+  display: inline-block;
+  margin: 10px;
+  width: 350px;
+  float:left;
+  border-radius: 5px;
+  position: relative;
+}
+
+.list-item .new-card-form {
+  display: none;
+}
+
+.list-item:hover .new-card-form {
+  position: absolute;
+  bottom: 10px;
+  display: inline-block;
+  color: black;
+}
+
+.list-item:hover label {
+  color: white;
+}
+
+.list-item h3 a {
+  display: none;
+}
+
+.list-item h3:hover a {
+  display: inline-block;
+  font-weight: normal;
 }

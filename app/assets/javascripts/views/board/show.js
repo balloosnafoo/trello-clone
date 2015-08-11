@@ -9,6 +9,7 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.lists(), "add", this.addListSubview);
     this.listenTo(this.model.lists(), "add", this.render);
+    this.listenTo(this.model.lists(), "remove", this.removeListView);
     this.model.lists().each(function (list) {
       this.addListSubview(list);
     }.bind(this));
@@ -16,9 +17,14 @@ Quello.Views.BoardShow = Backbone.CompositeView.extend({
 
   addListSubview: function (list) {
     var listIndexItem = new Quello.Views.ListsIndexItem({
-      model: list
+      model: list,
+      collection: this.collection
     });
-    this.addSubview("div.lists-index.row", listIndexItem);
+    this.addSubview("div.lists-index", listIndexItem);
+  },
+
+  removeListView: function (list) {
+    this.removeModelSubview('div.lists-index', list);
   },
 
   delete: function (event) {
